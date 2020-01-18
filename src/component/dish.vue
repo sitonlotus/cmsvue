@@ -1,0 +1,69 @@
+<template>
+    <div>
+        <el-breadcrumb>
+            <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>学院管理</el-breadcrumb-item>
+            <el-breadcrumb-item>菜品管理</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-card class="box-card">
+            <el-table
+                :data="dishData"
+                border
+                style="width: 100%">
+                <el-table-column
+                    prop="id_coach"
+                    label="菜品编号"
+                    width="100px">
+                </el-table-column>
+                <el-table-column
+                    prop="name_coach"
+                    label="菜品名称">
+                </el-table-column>
+                <el-table-column
+                    prop="dage_coach"
+                    label="生产时间">
+                </el-table-column>
+                <el-table-column
+                    prop="tage_coach"
+                    label="失效时间">
+                </el-table-column>
+                <el-table-column
+                    prop="honor_coach"
+                    label="折扣">
+                </el-table-column>
+                <el-table-column
+                    prop="type_coach"
+                    label="价格">
+                </el-table-column>
+                <el-table-column
+                    prop="evalunte_coach"
+                    label="评价">
+                </el-table-column>
+                <el-table-column
+                    label="照片">
+                    <template slot-scope="scope">
+                        <img :src="'http://www.qhdlink-student.top/'+scope.row.path_coach" alt="">
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-card>
+    </div>
+</template>
+<script>
+export default {
+    name:"dish",
+    data(){
+        return{
+            dishData:this.$store.state.dish
+        }
+    },
+    methods:{
+        init:function(){
+            this.$store.dispatch("dish",[this.$store.state.login.username,this.$store.state.login.userpwd])
+        },
+    },
+    mounted(){
+        this.init();
+    }
+}
+</script>
